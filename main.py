@@ -1,6 +1,6 @@
 # uvicorn main:app --reload
 from pathlib import Path
-
+# This is the main entry point for the FastAPI application. It sets up the database, includes all the routers, and defines routes for serving HTML templates for the frontend.
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, RedirectResponse
