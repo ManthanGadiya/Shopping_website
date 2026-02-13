@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Pet Shop</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <h1>Online Pet Shop</h1>
+        <p>Frontend Step 1: Foundation + Backend Connection Check</p>
+    </header>
+
+    <main class="layout">
+        <section class="card">
+            <h2>Backend Status</h2>
+            <p id="status-text">Checking backend...</p>
+            <label for="api-base-url">Backend URL</label>
+            <input id="api-base-url" type="text" placeholder="http://127.0.0.1:8000">
+            <div class="actions">
+                <button id="save-api-url" type="button">Save URL</button>
+                <button id="retry-connection" type="button">Retry Check</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Customer Area</h2>
+            <p>Placeholder for login, profile, and shopping journey.</p>
+        </section>
+
+        <section class="card">
+            <h2>Admin Area</h2>
+            <p>Placeholder for dashboard, products, orders, and reports.</p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <small>College Project Demo - Receipt-only payment flow.</small>
+    </footer>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

@@ -180,3 +180,40 @@ Backend endpoint phase is completed for:
 ## Remaining Optional Improvements
 - Unit/integration test suite with pytest
 - Pagination/filtering enhancements for admin dashboards
+
+## Frontend Plan (8 Steps)
+1. Frontend foundation shell + backend health connection check
+2. Customer authentication UI (register/login/logout + token handling)
+3. Product catalog UI (list/search/filter + product details)
+4. Cart UI (add/update/remove/clear)
+5. Checkout + order history UI
+6. Payment receipt UI (JSON view + PDF download link)
+7. Admin dashboard UI (products, orders, payment status, reports)
+8. Final polish and validation (responsive fixes, UX cleanup, end-to-end flow)
+
+### Frontend Step 1 Completed
+- Added static frontend entry page: `static/index.html`
+- Added base styling: `static/css/style.css`
+- Added frontend bootstrap script: `static/js/app.js`
+- Added backend connectivity check in UI (`GET /`) and status indicator
+- Configured FastAPI static serving:
+  - `app.mount("/static", ...)`
+  - frontend entry route: `GET /app`
+
+### Frontend Connection Fix Applied
+- Added CORS middleware in `main.py` for localhost dev ports (`5500`, `8000`)
+- Added CORS support for JetBrains/PyCharm static server origins (`63342`)
+- Added CORS support for `Origin: null` (when frontend is opened via `file://`)
+- Added dedicated health endpoint: `GET /health`
+- Updated frontend health check to use `GET /health`
+- Added backend URL input controls in UI:
+  - Save custom API base URL
+  - Retry connection check
+- Added fallback backend URL `http://127.0.0.1:8000` when opening frontend as `file://`
+
+### How To Run Without Connection Errors
+1. Start backend:
+   - `uvicorn main:app --reload`
+2. Open frontend:
+   - Preferred: `http://127.0.0.1:8000/app`
+   - Or via separate frontend server (e.g. port `5500`) and set Backend URL in UI to `http://127.0.0.1:8000`
