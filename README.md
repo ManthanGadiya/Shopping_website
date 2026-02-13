@@ -94,6 +94,7 @@ Implemented in `crud.py`:
 - `GET /payments/order/{order_id}` (admin only)
 - `PATCH /payments/{payment_id}/status` (admin only)
 - `GET /payments/{payment_id}/receipt`
+- `GET /payments/{payment_id}/receipt/pdf` (download PDF receipt)
 
 #### Reports (`routers/reports.py`)
 - `GET /reports/sales-summary` (admin only)
@@ -126,13 +127,18 @@ Implemented in `crud.py`:
 - No real payment gateway integration is used.
 - At checkout, the system creates an order and stores a payment record with status `RECEIPT_GENERATED`.
 - A receipt can be generated via `GET /payments/{payment_id}/receipt`.
+- A PDF receipt can be downloaded via `GET /payments/{payment_id}/receipt/pdf`.
 - The receipt clearly states that no actual transaction was processed.
+- PDF generation is implemented in `utils/pdf_generator.py` and files are written to `receipts/`.
 
 ### 9. Seed Data Added
 - Added `utils/seed_data.py`
-- Seeded into `petshop.db`:
+- Seed script now creates a full demo dataset in `petshop.db`:
   - `1` admin
-  - `10` customers
+  - `10` customers (minimum)
+  - `10` products (minimum)
+  - sample reviews
+  - sample orders and payment receipts
 - Run with:
   - `python -m utils.seed_data`
 - Seed credentials:
@@ -153,6 +159,7 @@ Implemented in `crud.py`:
   - verify checkout `payment_status = RECEIPT_GENERATED`
   - fetch payment by order
   - generate payment receipt
+  - download PDF receipt
   - run reports endpoints
   - fetch order
   - create review
@@ -166,10 +173,10 @@ Backend endpoint phase is completed for:
 - Cart management
 - Order + receipt-only payment flow
 - Payment and receipt module
+- PDF receipt download support
 - Admin reports module
 - Product reviews
 
 ## Remaining Optional Improvements
-- PDF receipt file generation in `utils/pdf_generator.py`
 - Unit/integration test suite with pytest
 - Pagination/filtering enhancements for admin dashboards

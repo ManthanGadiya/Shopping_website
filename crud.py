@@ -102,6 +102,10 @@ def get_product(db: Session, product_id: int) -> Optional[models.Product]:
     return db.query(models.Product).filter(models.Product.product_id == product_id).first()
 
 
+def get_product_by_name(db: Session, product_name: str) -> Optional[models.Product]:
+    return db.query(models.Product).filter(models.Product.product_name == product_name).first()
+
+
 def list_products(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Product).offset(skip).limit(limit).all()
 

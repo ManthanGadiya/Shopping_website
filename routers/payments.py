@@ -1,10 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 
 import crud
 import schemas
 from database import get_db
 from utils.dependencies import require_admin
+from utils.pdf_generator import generate_receipt_pdf
 
 router = APIRouter(prefix="/payments", tags=["Payments"])
 
@@ -54,3 +56,17 @@ def generate_receipt(payment_id: int, db: Session = Depends(get_db)):
     if not payment:
         raise HTTPException(status_code=404, detail="Payment not found")
     return crud.build_payment_receipt(db, payment)
+
+
+@router.get("/{payment_id}/receipt/pdf")
+def download_receipt_pdf(payment_id: int, db: Session = Depends(get_db)):
+    payment = crud.get_payment_by_id(db, payment_id)
+    if not payment:
+        raise HTTPException(status_code=404, detail="Payment not found")
+    receipt = crud.build_payment_receipt(db, payment)
+    pdf_path = generate_receipt_pdf(receipt, output_dir="D:/Shopping_website/receipts")
+    return FileResponse(
+        path=pdf_path,
+        media_type="application/pdf",
+        filename=f"{receipt['receipt_id']}.pdf",
+    )
