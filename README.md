@@ -198,7 +198,19 @@ Backend endpoint phase is completed for:
 - Added backend connectivity check in UI (`GET /`) and status indicator
 - Configured FastAPI static serving:
   - `app.mount("/static", ...)`
-  - frontend entry route: `GET /app`
+- frontend entry route: `GET /app`
+
+### Frontend Step 2 Completed (Customer Auth UI)
+- Added customer register form in `static/index.html`
+- Added customer login/logout controls in `static/index.html`
+- Added profile panel with live `/customers/me` data
+- Implemented auth logic in `static/js/app.js`:
+  - `POST /customers/register`
+  - `POST /customers/login`
+  - token storage in `localStorage` (`customerToken`)
+  - `GET /customers/me` with bearer token
+  - logout and profile refresh handling
+- Extended styles in `static/css/style.css` for forms/messages/profile box
 
 ### Frontend Connection Fix Applied
 - Added CORS middleware in `main.py` for localhost dev ports (`5500`, `8000`)

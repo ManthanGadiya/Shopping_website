@@ -9,7 +9,7 @@
 <body>
     <header class="site-header">
         <h1>Online Pet Shop</h1>
-        <p>Frontend Step 1: Foundation + Backend Connection Check</p>
+        <p>Frontend Step 2: Customer Authentication</p>
     </header>
 
     <main class="layout">
@@ -25,8 +25,36 @@
         </section>
 
         <section class="card">
-            <h2>Customer Area</h2>
-            <p>Placeholder for login, profile, and shopping journey.</p>
+            <h2>Customer Register</h2>
+            <form id="register-form" class="stack">
+                <input id="reg-name" type="text" placeholder="Name" required>
+                <input id="reg-contact" type="text" placeholder="Contact Number">
+                <input id="reg-email" type="email" placeholder="Email" required>
+                <input id="reg-pet-type" type="text" placeholder="Pet Type (Dog/Cat/etc)">
+                <input id="reg-password" type="password" placeholder="Password" required>
+                <button type="submit">Register</button>
+            </form>
+            <p id="register-msg" class="inline-message"></p>
+        </section>
+
+        <section class="card">
+            <h2>Customer Login</h2>
+            <form id="login-form" class="stack">
+                <input id="login-email" type="email" placeholder="Email" required>
+                <input id="login-password" type="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <div class="actions">
+                <button id="logout-btn" type="button">Logout</button>
+                <button id="refresh-profile-btn" type="button">Refresh Profile</button>
+            </div>
+            <p id="auth-msg" class="inline-message"></p>
+        </section>
+
+        <section class="card">
+            <h2>My Profile</h2>
+            <p><strong>Status:</strong> <span id="auth-status">Logged out</span></p>
+            <pre id="profile-box" class="profile-box">No profile loaded.</pre>
         </section>
 
         <section class="card">
