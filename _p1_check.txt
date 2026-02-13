@@ -1,0 +1,757 @@
+
+--- PAGE 1 ---
+  
+ 
+online pet 
+shop 
+Let your pet be smarter 
+EFFICIENT AND RELIABLE WAY TO MEET 
+NEEDS OF YOUR FURRY FRIEND 
+      
+Namrata salunke 
+      
+ 
+
+
+--- PAGE 2 ---
+ 
+
+
+--- PAGE 3 ---
+Preliminary Investigation 
+ 
+1.1 Problem Identification and Definition 
+In today’s fast-paced world, pet owners often struggle to find a reliable and efficient way to 
+meet their pet’s needs. Traditional pet stores have several limitations such as restricted 
+operating hours, limited inventory, and lack of personalized customer service. Additionally, 
+geographical location can make it difficult for pet owners in remote or urban areas to 
+access high-quality pet supplies. 
+Many pet owners also lack proper guidance when it comes to pet care, diet, and health, 
+which leads to incorrect purchases. Current online platforms often fall short in offering 
+recommendations, choices, etc. 
+By addressing these challenges, the Online Pet Shop seeks to enhance accessibility, 
+convenience, and overall pet ownership experience, ensuring that pets and their owners 
+receive the best possible care and support. 
+ 
+1.2 Problem Description 
+ 
+Issues in the current manual/physical shop system: 
+ 
+1. Limited Accessibility (Restricted to Shop Hours) 
+Customers can only purchase products during the physical shop’s working hours. This creates 
+difficulties for people who work late, live far away, or need emergency pet supplies outside of 
+business hours. 
+ 
+ 
+2. No Centralized Record of Customers, Orders, and Services 
+
+--- PAGE 4 ---
+The existing system does not maintain proper digital records of customer details, past orders, or 
+service usage. This makes it hard to analyse customer behaviour, provide personalized offers, or 
+track regular requirements like repeat purchases of food or medicines. 
+ 
+ 
+3. Manual Inventory Tracking Leads to Stock Errors 
+Since most shops still record stock manually, mistakes are common. Products may run out 
+without the shopkeeper realizing, leading to stock shortages. On the other hand, some products 
+may be overstocked, causing wastage of resources and storage space. 
+ 
+4.Customer Relationship Gap 
+Traditional shops rarely keep track of customer purchase history or preferences. As a result, 
+they cannot provide loyalty discounts, personalized offers, or subscription-based packages 
+(e.g., monthly dog food delivery). This reduces long-term customer retention and satisfaction. 
+ 
+ 
+1.3 Fact-Finding Techniques 
+ 
+1. Observation 
+Direct visits to local pet shops and veterinary clinics can help in understanding how customers 
+currently purchase products and avail services. By observing customer behaviour, waiting 
+times, and transaction handling, one can identify the shortcomings of the manual system. For 
+example, noticing frequent customer complaints about out-of-stock products highlights the 
+need for a digital inventory system. 
+ 
+ 
+2. Interviews 
+Talking directly with pet owners, shopkeepers, veterinarians, and grooming staff provides first-
+hand information about their needs, problems, and expectations. Shopkeepers may mention 
+difficulties in stock management, while customers may stress on the need for online delivery or 
+appointment booking. Such interviews give valuable insights into system requirements. 
+ 
+ 
+3. Questionnaires / Surveys 
+Distributing surveys (online or offline) to pet owners can help collect large-scale data about 
+their preferences. Questions can include: 
+
+--- PAGE 5 ---
+How often do you purchase pet supplies? 
+Would you prefer home delivery of pet food and medicines? 
+How important is online appointment booking for grooming/vet services? 
+What payment methods do you prefer (cash, UPI, card)? 
+Analysing this data ensures the system is designed according to actual customer needs. 
+ 
+ 
+4. Document Review 
+Reviewing competitor websites, online pet care platforms, and industry reports provides useful 
+secondary data. It helps in understanding what features are commonly offered (like product 
+categories, adoption listings, and delivery options) and what gaps exist in the market. Studying 
+such documents also ensures that the new system includes modern features and 
+remains competitive. 
+ 
+ 
+1.4 Drawbacks of Existing System 
+ 
+1. Paper-Based Registration and Billing 
+In the current system, most small pet shops record sales and customer details on paper or in 
+basic notebooks. This leads to data loss, human errors, and difficulties in tracking customer 
+history or repeated purchases. Over time, managing these records becomes highly inefficient. 
+ 
+ 
+2. No Digital Record of Customers, Orders, or Inventory 
+Since there is no centralized digital database, shopkeepers cannot access detailed information 
+about past sales, current stock, or customer behaviour. This prevents data-driven decision 
+making, personalized offers, or loyalty programs, which are common in modern online 
+platforms. 
+ 
+ 
+3. No Online Payment  
+Customers are restricted to physical payments, usually cash, when purchasing products or 
+booking services. With the increasing trend of digital transactions (UPI, debit/credit cards, net 
+banking), the lack of online payment support makes the system outdated and less convenient.. 
+ 
+
+--- PAGE 6 ---
+ 
+4. Time-Consuming and Error-Prone Processes 
+Manual entry of sales, orders, and appointments consumes a lot of time for both shop staff and 
+customers. Mistakes like incorrect billing, mismanaged stock updates, or lost appointment 
+details are common. This reduces overall efficiency and customer satisfaction. 
+1.5 Scope of the Proposed System 
+ 
+The Online Pet Shop will provide: 
+ 
+1. Wide Range of Pet Supplies 
+The system will allow customers to browse and purchase a variety of products such as pet food, 
+grooming items, medicines, toys, and accessories. Categories will be well-organized, making it 
+easy to search and compare products. 
+ 
+2. Doorstep Delivery of Pet Products 
+The system will integrate a delivery service where customers can receive their orders at home. 
+Delivery status updates and tracking features will improve customer satisfaction and trust. 
+ 
+3. Customer Accounts and Order Tracking 
+Each registered customer will have an account to view their order history, track ongoing 
+deliveries, and manage appointments. This improves transparency and enhances user 
+experience. 
+ 
+4. Online Payments and Multiple Modes of Transaction 
+The platform will support secure online payments through UPI, debit/credit cards, net banking, 
+and digital wallets. Customers can also opt for cash on delivery. This flexibility ensures 
+convenience and caters to different user preferences. 
+ 
+5. Special Offers, Discounts, and Subscriptions 
+Customers can benefit from loyalty programs, discount coupons, and subscription packages 
+(e.g., monthly food delivery). These features will increase customer retention and ensure regular 
+sales for the business. 
+ 
+6. Feedback Collection and Continuous Improvement 
+
+--- PAGE 7 ---
+After every purchase or service, customers will be able to rate their experience and leave 
+suggestions. This feedback will help administrators improve product quality, service efficiency, 
+and overall customer satisfaction. 
+ 
+ 
+7. Scalability for Future Expansion 
+The proposed system will be designed to handle more users, products, and services in the 
+future. It can also integrate advanced features like AI-based pet care tips, live vet consultations, 
+or GPS tracking for pet safety. 
+ 
+ 
+1.6 Feasibility Study 
+ 
+A feasibility study ensures that the proposed system is practical, cost-effective, and can be 
+implemented successfully within the available resources and time. The following aspects are 
+considered: 
+ 
+1. Technical Feasibility 
+The proposed system is technically feasible because: 
+It can be developed using widely available technologies such as web applications (HTML, CSS, 
+PHP , etc.) and a relational database (MySQL). 
+Hosting can be done on affordable cloud platforms such as AWS, Azure, or even shared hosting 
+providers. 
+No specialized or high-end hardware is required. A normal PC or laptop for administrators and a 
+mobile/desktop browser for customers are sufficient. 
+Existing open-source frameworks and payment gateway integrations ( PayPal ) make 
+development faster and reliable. 
+Thus, there are no major technical barriers to implementing the system. 
+ 
+2. Economic Feasibility 
+The system is cost-effective because: 
+Initial development can be done at a low cost using open-source tools and frameworks. 
+Hosting and domain charges are relatively affordable. 
+Compared to manual record-keeping, the system reduces costs related to paper, printing, and 
+physical storage. 
+
+--- PAGE 8 ---
+Automation of tasks like inventory management, billing, and notifications saves manpower 
+costs. 
+Online marketing and digital presence can increase sales and revenue, balancing the 
+investment quickly. 
+Therefore, the project is economically viable. 
+ 
+ 
+3. Operational Feasibility 
+The system is easy to operate and manage because: 
+Customers will find the interface user-friendly, with clear navigation for shopping and making 
+payments. 
+Shop administrators can easily update products, manage stock, and handle appointments 
+without requiring advanced technical skills. 
+Automated notifications reduce human errors and ensure smooth operations. 
+Training requirements for staff are minimal since the system is designed with simplicity in mind. 
+Hence, the system is operationally practical and can be adopted smoothly. 
+ 
+4. Time Feasibility 
+The project can be completed within a reasonable time frame, depending on the scope: 
+A basic version (product listings, orders, payments, simple appointment booking) can be 
+developed within 2–3 weeks. 
+A full-featured version (adoption listings, loyalty programs, advanced notifications) may take 1–
+2 months with proper planning. 
+Since the tools required are easily available and the design is straightforward, deadlines can be 
+met without significant delays. 
+Thus, the project is time-feasible and can be delivered on schedule. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+--- PAGE 9 ---
+❖ Requirement Specification 
+ 
+2.1 Data Requirements of the System 
+ 
+1. Customer Data: 
+▪ Full Name 
+▪ Contact Number 
+▪ Email ID 
+▪ Address 
+▪ Pet Type (Dog, Cat, Bird, etc.) 
+▪ Order History 
+ 
+2. Product Data: 
+ 
+▪ Product ID 
+▪ Name 
+▪ Category (Food, Toys, Grooming, Accessories) 
+▪ Price 
+▪ Stock Quantity 
+▪ Supplier details 
+ 
+3. Order Data: 
+ 
+▪ Order ID 
+▪ Customer ID 
+▪ Product Details 
+▪ Total Price 
+▪ Payment Status 
+▪ Delivery Status 
+ 
+ 
+ 
+2.2 Identify End Users of the System 
+ 
+1.Customers/Pet Owners 
+ 
+
+--- PAGE 10 ---
+o Browse and purchase products. 
+o Review and rate products. 
+ 
+2. Shop Administrator 
+ 
+o Manage inventory, orders, and services. 
+o Provide articles, blogs, or guides on pet care, grooming, and health. 
+o View reports and customer feedback. 
+ 
+2.3 Input Data to the System 
+ 
+From Customers: 
+ 
+✓ Registration form 
+✓ Order details 
+✓ Payment details 
+ 
+From Admin: 
+ 
+✓ Product details 
+✓ Service listings 
+✓ Stock updates 
+ 
+2.4 Output Information from the System 
+ 
+Order confirmation email/SMS 
+Payment receipts 
+Delivery tracking updates 
+Sales and inventory reports 
+ 
+2.5 Functional Requirements 
+ 
+For Customers: 
+
+--- PAGE 11 ---
+Register/login to the system. 
+Browse products and services. 
+Place orders and make online payments. 
+ 
+For Admin: 
+Add/edit/remove products and services. 
+Manage orders and delivery. 
+Track inventory. 
+Manage customer accounts. 
+ 
+   Non-Functional Requirements 
+ 
+Performance: Fast loading and processing for smooth shopping experience. 
+ 
+Usability: Simple and responsive interface for all users. 
+ 
+Security: Secure payment gateway and data encryption. 
+ 
+Reliability: Stable system with minimal downtime. 
+ 
+Availability: Accessible 24/7. 
+ 
+Scalability: Can handle more customers, products, and services in future. 
+ 
+Compatibility: Works on mobile and desktop devices. 
+ 
+Maintainability: Easy to update and expand features. 
+ 
+ 
+ 
+
+--- PAGE 12 ---
+ 
+❖ DATABASE DESIGN 
+ 
+3.1 Identify entities and attributes 
+ 
+ENTITIES ATTRIBUTES 
+ADMIN admin_id 
+ User name 
+ password 
+  
+CUSTOMER Customer_id 
+ name 
+ Contact_no 
+ email 
+ Pet_type 
+ password 
+  
+PRODUCT Product_id 
+ Product_name 
+ Product_type 
+ Price 
+ ratings 
+  
+ORDER ITEM Order_item_id 
+ Order_id 
+ Product_id 
+ Price 
+ Quantity 
+ sub total 
+  
+ORDER Order_id 
+ Customer_id 
+
+--- PAGE 13 ---
+ Order_date 
+ Total_amount 
+PAYMENT Payment_id 
+ Payment_method 
+ 
+ 
+ 
+3.2 ER diagram 
+   
+ 
+ 
+ rating 
+
+--- PAGE 14 ---
+ 
+ 
+ 
+3.3 identify all tables , fields , relationship between tables 
+ 
+Table 1- admin 
+Field name Data type key description 
+Admin_id INT PK Unique id for 
+each admin 
+User_name VARCHAR(100)  Admin’s name 
+password VARCHAR(100)  Password for 
+admin 
+ 
+ 
+Table 2- customer  
+Field name Data type key Description 
+Customer_id INT PK Unique id for 
+each customer 
+Name VARCHAR(100)  Customer’s full 
+name 
+Email VARCHAR(100)  Customer’s 
+email 
+Pet_type VARCHAR(50)  Breed name 
+password VARCHAR(100) UK Unique 
+password to 
+each customer 
+ 
+ 
+Table 3- product 
+Field name Data type key description 
+Product_id INT PK Unique id for 
+each product 
+Product_name VARCHAR(100)  Product’s name 
+Product_type VARCHAR(100)  Product’s type 
+price FLOAT  Price of product 
+
+--- PAGE 15 ---
+rating FLOAT  Product quality 
+based rating 
+ 
+ 
+Table 4 – order_item 
+ 
+Field name Data type key description 
+Order_item_id  INT PK Unique id for 
+order item 
+Order_id  INT FK Links to order 
+table 
+Product_id INT FK Links to product 
+table 
+Price FLOAT  Price of product 
+Quantity INT  Quantity of 
+product 
+Sub total FLOAT  Subtotal of price 
+and quantity 
+ 
+ 
+Table 5- order 
+ 
+Field name Data type  key description 
+Order_id INT PK Unique id for 
+each order 
+Customer_id INT FK Links to 
+customer table 
+Order_date DATE  Date of order 
+Total amount FLOAT  Total amount of 
+order 
+ 
+ 
+Table 6 – payment 
+Field name Data type  key description 
+
+--- PAGE 16 ---
+Payment_id INT PK Unique id for 
+each payment 
+Payment_method VARCHAR(50)  Types of 
+available 
+payment 
+methods 
+ 
+ 
+3.4 Normalise database 
+ 
+ 
+Table 1- admin 
+ 
+Field name key 
+Admin_id Primary key 
+User_name  
+password  
+ 
+ 
+Table 2 -customer 
+ 
+Field name key 
+Customer_id Primary key 
+Name  
+Email  
+Pet_type  
+password Unique key 
+ 
+ 
+Table 3 – product  
+ 
+Field name key 
+Product_id Primary key 
+
+--- PAGE 17 ---
+Product_name  
+Product_type  
+price  
+rating  
+ 
+ 
+ 
+Table 4- order_item 
+ 
+Field name key 
+Order_item_id  Primary key 
+Order_id  Foreign key 
+Product_id Foreign key 
+Price  
+Quantity  
+Sub total  
+ 
+ 
+Table 5 – order 
+  
+Field name key 
+Order_id Primary key 
+Customer_id Foreign key 
+Order_date  
+Total amount  
+ 
+ 
+Table 6 - payment 
+ 
+Field name key 
+Payment_id Primary key 
+Payment_method  
+ 
+ 
+
+--- PAGE 18 ---
+ 
+❖ SYSTEM DESIGN 
+4.1 CLASS DIAGRAM 
+ 
+ 
+  
+Web site 
++IP: 
++NAME: 
++URL: 
++Isconnect() 
+ADMIN 
++ID: 
++NAME: 
++PASSWORD: 
++Add() 
++Manage() 
+ 
+HOMEPAGE 
+ 
+ 
++LOGIN(): 
++UPDATE(): 
+ 
+ 
+ 
+PRODUCT 
++NAME: 
++ID; 
++PRICE: 
++rating: 
++Add() 
++Delete() 
++Update(0 
+CUSTOMER 
+-ID: 
++NAME: 
+-EMAIL: 
+-CONTACT NO: 
++PET_TYPE: 
+-PASSWORD: 
++Searcgproduct() 
++Buyproduct() 
++Makepayment() 
+ 
+ORDER 
++ID: 
++TOTAL AMOUNT: 
++Confirm() 
++Cancel() 
+PAYMENT 
++ID: 
++METHOD: 
++Do() 
++Cancel() 
+UPI 
+ 
+ 
++pay() 
+
+--- PAGE 19 ---
+4.2 OBJECT DIAGRAM 
+ 
+ 
+ 
+  
+Web site 
++IP: xxxxxx 
++NAME: Khushi pet 
+shop  
++URL: 
+ 
+HOMEPAGE 
+ 
+ 
+ 
+ 
+ 
+ 
+PRODUCT 
++NAME: 
+pedigree veg 
+3kg 
++ID:1234 
++PRICE:980 
++rating-3.5 
+ 
+CUSTOMER 
+-ID:21 
++NAME: Veda 
+-EMAIL: 
+veda@gmail.com 
+-CONTACT 
+NO:6758765435 
++PET_TYPE: 
+labrador 
+-PASSWORD:2211 
++Searcgproduct() 
++Buyproduct() 
++Makepayment() 
+ORDER 
++ID:123 
++TOTAL 
+AMOUNT:980 
+PAYMENT 
++ID:112 
++METHOD: 
+UPI 
+UPI 
+ 
+ 
+ 
+ADMIN 
++ID:666 
++NAME: 
+NAMRATA 
++PASSWORD:X
+XXX 
+ 
+
+--- PAGE 20 ---
+4.3 Component diagram 
+ 
+ 
+ 
+  
+
+
+--- PAGE 21 ---
+4.4 deployment diagram 
+ 
+ 
+ 
+  
+                             WEB SERVER (IIS) 
+ 
+CLIENT 
+CLIENT 
+CLIENT 
+PAYMENT 
+PORTAL 
+DATABASE SERVER 
+ PRODUCT DATABASE 
+ONLINE SHOPPING 
+DATABASE 
+ORDER ITEM 
+ORDER 
+PAYMENT 
+GATEWAY 
+
+--- PAGE 22 ---
+4.5 Use case diagram 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- PAGE 23 ---
+4.6 Activity diagram 
+ 
+ 
+                                                      
+ 
+                                                                  
+Admin adds products  
+Customer logins and views 
+products 
+Selects products and add 
+to cart 
+Customer Orders product 
+Customer makes payment 
+Order confirmed 
+
+--- PAGE 24 ---
+       
+4.7 State chart diagram 
+                              
+ 
+                                                                                                      
+                                                                                                                               
+                                                                                                                            
+admin customer login 
+View 
+product
+s 
+Add to 
+cart 
+Final 
+order 
+payment        UPI 
+Error 
+Order 
+confirmed 
+Payment 
+unsuccessful 
+Payment 
+successful 
+
+--- PAGE 25 ---
+4.8 sequence diagram 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- PAGE 26 ---
+ 
+4.9 Collaboration diagram 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

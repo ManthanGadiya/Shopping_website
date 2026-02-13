@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard - Khushi Pet Shop{% endblock %}
+{% block page_id %}admin_dashboard{% endblock %}
+{% block content %}
+<section class="section-head">
+    <h2>Admin Dashboard</h2>
+    <div class="actions">
+        <a class="btn-link" href="/admin/products-page">Products Page</a>
+        <a class="btn-link" href="/admin/orders-page">Orders Page</a>
+    </div>
+</section>
+
+<section class="card">
+    <h3>Admin Access</h3>
+    <form id="admin-login-form" class="stack">
+        <input id="admin-email" type="email" placeholder="Admin email" required>
+        <input id="admin-password" type="password" placeholder="Password" required>
+        <div class="actions">
+            <button type="submit">Login as Admin</button>
+            <button id="admin-logout-btn" type="button" class="ghost">Logout Admin</button>
+        </div>
+    </form>
+    <p id="admin-login-msg" class="msg"></p>
+</section>
+
+<section class="admin-kpis" id="admin-kpis">
+    <article class="card"><h4>Total Orders</h4><p id="kpi-orders" class="kpi">-</p></article>
+    <article class="card"><h4>Total Revenue</h4><p id="kpi-revenue" class="kpi">-</p></article>
+    <article class="card"><h4>Items Sold</h4><p id="kpi-items" class="kpi">-</p></article>
+    <article class="card"><h4>Receipts Generated</h4><p id="kpi-receipts" class="kpi">-</p></article>
+</section>
+
+<section class="grid-2">
+    <article class="card">
+        <h3>Add Product</h3>
+        <form id="admin-add-product-form" class="stack">
+            <input id="new-product-name" type="text" placeholder="Product name" required>
+            <input id="new-product-type" type="text" placeholder="Product type" required>
+            <input id="new-product-price" type="number" min="1" step="0.01" placeholder="Price" required>
+            <input id="new-product-stock" type="number" min="0" placeholder="Stock quantity" required>
+            <button type="submit">Add Product</button>
+        </form>
+        <p id="admin-product-msg" class="msg"></p>
+    </article>
+
+    <article class="card">
+        <h3>Inventory Snapshot</h3>
+        <p id="inventory-summary" class="muted">Load admin data to view inventory summary.</p>
+    </article>
+</section>
+
+<section class="grid-2">
+    <article class="card">
+        <h3>Add Service</h3>
+        <form id="admin-add-service-form" class="stack">
+            <input id="new-service-name" type="text" placeholder="Service name" required>
+            <textarea id="new-service-description" placeholder="Service description"></textarea>
+            <input id="new-service-price" type="number" min="0" step="0.01" placeholder="Service price" required>
+            <button type="submit">Add Service</button>
+        </form>
+        <p id="admin-service-msg" class="msg"></p>
+    </article>
+
+    <article class="card">
+        <h3>Add Guide / Blog</h3>
+        <form id="admin-add-article-form" class="stack">
+            <input id="new-article-title" type="text" placeholder="Article title" required>
+            <textarea id="new-article-content" placeholder="Article content" required></textarea>
+            <button type="submit">Publish Article</button>
+        </form>
+        <p id="admin-article-msg" class="msg"></p>
+    </article>
+</section>
+
+<section>
+    <h3>Manage Products</h3>
+    <div id="admin-products-list" class="stack"></div>
+</section>
+
+<section>
+    <h3>Manage Services</h3>
+    <div id="admin-services-list" class="stack"></div>
+</section>
+
+<section>
+    <h3>Manage Guides / Blogs</h3>
+    <div id="admin-articles-list" class="stack"></div>
+</section>
+
+<section>
+    <h3>Manage Orders</h3>
+    <div id="admin-orders-list" class="stack"></div>
+</section>
+
+<section>
+    <h3>Manage Payments</h3>
+    <div id="admin-payments-list" class="stack"></div>
+</section>
+{% endblock %}

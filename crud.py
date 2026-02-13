@@ -20,11 +20,17 @@ def get_admin_by_username(db: Session, user_name: str) -> Optional[models.Admin]
     return db.query(models.Admin).filter(models.Admin.user_name == user_name).first()
 
 
+def get_admin_by_email(db: Session, email: str) -> Optional[models.Admin]:
+    return db.query(models.Admin).filter(models.Admin.email == email).first()
+
+
 def create_admin(db: Session, payload: schemas.AdminCreate) -> Optional[models.Admin]:
-    if get_admin_by_username(db, payload.user_name):
+    email = payload.email or f"{payload.user_name.lower()}@petshop.com"
+    if get_admin_by_username(db, payload.user_name) or get_admin_by_email(db, email):
         return None
     db_admin = models.Admin(
         user_name=payload.user_name,
+        email=email,
         password=hash_password(payload.password),
     )
     db.add(db_admin)
@@ -33,8 +39,17 @@ def create_admin(db: Session, payload: schemas.AdminCreate) -> Optional[models.A
     return db_admin
 
 
-def authenticate_admin(db: Session, user_name: str, password: str) -> Optional[models.Admin]:
-    admin = get_admin_by_username(db, user_name)
+def authenticate_admin(
+    db: Session,
+    password: str,
+    user_name: Optional[str] = None,
+    email: Optional[str] = None,
+) -> Optional[models.Admin]:
+    admin = None
+    if email:
+        admin = get_admin_by_email(db, email)
+    if not admin and user_name:
+        admin = get_admin_by_username(db, user_name)
     if not admin:
         return None
     if not verify_password(password, admin.password):
@@ -145,6 +160,8 @@ def add_to_cart(db: Session, payload: schemas.CartAdd) -> Optional[models.CartIt
     product = get_product(db, payload.product_id)
     if not customer or not product:
         return None
+    if payload.quantity > product.stock_quantity:
+        raise ValueError(f"Requested quantity exceeds stock. Available stock: {product.stock_quantity}")
 
     db_item = (
         db.query(models.CartItem)
@@ -155,7 +172,10 @@ def add_to_cart(db: Session, payload: schemas.CartAdd) -> Optional[models.CartIt
         .first()
     )
     if db_item:
-        db_item.quantity += payload.quantity
+        new_qty = db_item.quantity + payload.quantity
+        if new_qty > product.stock_quantity:
+            raise ValueError(f"Requested quantity exceeds stock. Available stock: {product.stock_quantity}")
+        db_item.quantity = new_qty
     else:
         db_item = models.CartItem(**payload.model_dump())
         db.add(db_item)
@@ -173,6 +193,8 @@ def update_cart_item(db: Session, cart_item_id: int, quantity: int) -> Optional[
     db_item = db.query(models.CartItem).filter(models.CartItem.cart_item_id == cart_item_id).first()
     if not db_item:
         return None
+    if quantity > db_item.product.stock_quantity:
+        raise ValueError(f"Requested quantity exceeds stock. Available stock: {db_item.product.stock_quantity}")
     db_item.quantity = quantity
     db.commit()
     db.refresh(db_item)
@@ -192,6 +214,30 @@ def clear_cart(db: Session, customer_id: int) -> int:
     deleted = db.query(models.CartItem).filter(models.CartItem.customer_id == customer_id).delete()
     db.commit()
     return deleted
+
+
+def create_notification(
+    db: Session,
+    customer_id: int,
+    title: str,
+    message: str,
+    related_order_id: Optional[int] = None,
+) -> models.Notification:
+    note = models.Notification(
+        customer_id=customer_id,
+        title=title,
+        message=message,
+        channel="MOCK_EMAIL_SMS",
+        related_order_id=related_order_id,
+    )
+    db.add(note)
+    return note
+
+
+def add_tracking_event(db: Session, order_id: int, status: str, note: Optional[str] = None) -> models.OrderTrackingEvent:
+    event = models.OrderTrackingEvent(order_id=order_id, status=status, note=note)
+    db.add(event)
+    return event
 
 
 def create_order_from_cart(db: Session, customer_id: int, payment_method: str) -> Optional[models.Order]:
@@ -243,6 +289,21 @@ def create_order_from_cart(db: Session, customer_id: int, payment_method: str) -
     )
     db.add(payment)
     order.payment_status = "RECEIPT_GENERATED"
+    add_tracking_event(db, order.order_id, "PLACED", "Order placed successfully")
+    create_notification(
+        db,
+        customer_id=customer_id,
+        title="Order Confirmation",
+        message=f"Your order #{order.order_id} has been placed. Receipt generated (demo mode).",
+        related_order_id=order.order_id,
+    )
+    create_notification(
+        db,
+        customer_id=customer_id,
+        title="Payment Receipt",
+        message=f"Payment receipt for order #{order.order_id} is generated. No real payment was processed.",
+        related_order_id=order.order_id,
+    )
 
     db.query(models.CartItem).filter(models.CartItem.customer_id == customer_id).delete()
     db.commit()
@@ -333,10 +394,25 @@ def update_order_status(
     order = get_order(db, order_id)
     if not order:
         return None
+    previous_delivery_status = order.delivery_status
     if payment_status is not None:
         order.payment_status = payment_status
     if delivery_status is not None:
         order.delivery_status = delivery_status
+        if delivery_status != previous_delivery_status:
+            add_tracking_event(
+                db,
+                order.order_id,
+                delivery_status,
+                f"Delivery status updated from {previous_delivery_status} to {delivery_status}",
+            )
+            create_notification(
+                db,
+                customer_id=order.customer_id,
+                title="Delivery Update",
+                message=f"Order #{order.order_id} status updated to {delivery_status}.",
+                related_order_id=order.order_id,
+            )
     db.commit()
     db.refresh(order)
     return order
@@ -363,6 +439,96 @@ def create_review(db: Session, payload: schemas.ReviewCreate) -> Optional[models
 
 def list_reviews_by_product(db: Session, product_id: int):
     return db.query(models.Review).filter(models.Review.product_id == product_id).all()
+
+
+def list_tracking_events_for_order(db: Session, order_id: int):
+    return (
+        db.query(models.OrderTrackingEvent)
+        .filter(models.OrderTrackingEvent.order_id == order_id)
+        .order_by(models.OrderTrackingEvent.created_at.asc())
+        .all()
+    )
+
+
+def list_notifications_for_customer(db: Session, customer_id: int):
+    return (
+        db.query(models.Notification)
+        .filter(models.Notification.customer_id == customer_id)
+        .order_by(models.Notification.created_at.desc())
+        .all()
+    )
+
+
+def list_services(db: Session):
+    return db.query(models.Service).all()
+
+
+def create_service(db: Session, payload: schemas.ServiceCreate) -> models.Service:
+    obj = models.Service(**payload.model_dump())
+    db.add(obj)
+    db.commit()
+    db.refresh(obj)
+    return obj
+
+
+def get_service(db: Session, service_id: int) -> Optional[models.Service]:
+    return db.query(models.Service).filter(models.Service.service_id == service_id).first()
+
+
+def update_service(db: Session, service_id: int, payload: schemas.ServiceUpdate) -> Optional[models.Service]:
+    obj = get_service(db, service_id)
+    if not obj:
+        return None
+    for field, value in payload.model_dump(exclude_unset=True).items():
+        setattr(obj, field, value)
+    db.commit()
+    db.refresh(obj)
+    return obj
+
+
+def delete_service(db: Session, service_id: int) -> bool:
+    obj = get_service(db, service_id)
+    if not obj:
+        return False
+    db.delete(obj)
+    db.commit()
+    return True
+
+
+def list_articles(db: Session):
+    return db.query(models.Article).order_by(models.Article.created_at.desc()).all()
+
+
+def create_article(db: Session, payload: schemas.ArticleCreate) -> models.Article:
+    obj = models.Article(**payload.model_dump())
+    db.add(obj)
+    db.commit()
+    db.refresh(obj)
+    return obj
+
+
+def get_article(db: Session, article_id: int) -> Optional[models.Article]:
+    return db.query(models.Article).filter(models.Article.article_id == article_id).first()
+
+
+def update_article(db: Session, article_id: int, payload: schemas.ArticleUpdate) -> Optional[models.Article]:
+    obj = get_article(db, article_id)
+    if not obj:
+        return None
+    for field, value in payload.model_dump(exclude_unset=True).items():
+        setattr(obj, field, value)
+    db.commit()
+    db.refresh(obj)
+    return obj
+
+
+def delete_article(db: Session, article_id: int) -> bool:
+    obj = get_article(db, article_id)
+    if not obj:
+        return False
+    db.delete(obj)
+    db.commit()
+    return True
 
 
 def get_sales_summary(db: Session) -> dict:

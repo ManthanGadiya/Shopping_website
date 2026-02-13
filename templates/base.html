@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Khushi Pet Shop{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/site.css">
+</head>
+<body data-page="{% block page_id %}base{% endblock %}" data-product-id="{% block product_id %}{% endblock %}">
+    <header class="topbar">
+        <div class="inner">
+            <a class="brand" href="/">Khushi Pet Shop</a>
+            <form id="global-search-form" class="search">
+                <input id="global-search-input" type="text" placeholder="Search products...">
+            </form>
+            <nav class="nav-links">
+                <a href="/">Home</a>
+                <a href="/services-page">Services</a>
+                <a href="/guides-page">Guides</a>
+                <a href="/cart-page">Cart</a>
+                <a href="/orders-page">My Orders</a>
+                <a href="/admin/dashboard">Admin</a>
+            </nav>
+            <div class="auth-actions">
+                <button id="customer-login-btn" type="button">Customer Login</button>
+                <button id="customer-logout-btn" type="button" class="ghost">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 Khushi Pet Shop • Pune • +91 8799974075</p>
+        <div class="api-tools">
+            <input id="api-base-url-input" type="text" placeholder="Backend URL (e.g. http://127.0.0.1:8000)">
+            <button id="save-api-base-btn" type="button">Save Backend URL</button>
+            <span id="api-status" class="muted">Checking backend...</span>
+        </div>
+    </footer>
+
+    <div id="login-modal" class="modal hidden">
+        <div class="modal-card">
+            <h3>Customer Login</h3>
+            <form id="customer-login-form" class="stack">
+                <input id="login-email" type="email" placeholder="Email" required>
+                <input id="login-password" type="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p id="login-msg" class="msg"></p>
+            <button id="close-login-modal" class="ghost" type="button">Close</button>
+        </div>
+    </div>
+
+    <script src="/static/js/site.js"></script>
+</body>
+</html>

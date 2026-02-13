@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Home - Khushi Pet Shop{% endblock %}
+{% block page_id %}home{% endblock %}
+{% block content %}
+<section class="hero">
+    <h1>Premium pet food & supplies - Pune delivery</h1>
+    <p>Fast delivery • Trusted brands • Expert support</p>
+    <div class="actions">
+        <a class="btn-link" href="/orders-page">Continue as User</a>
+        <a class="btn-link" href="/admin">Continue as Admin</a>
+    </div>
+</section>
+
+<section class="section-head">
+    <h2>Featured products</h2>
+    <select id="home-sort">
+        <option value="featured">Featured</option>
+        <option value="price_asc">Price: Low to High</option>
+        <option value="price_desc">Price: High to Low</option>
+        <option value="rating_desc">Rating</option>
+    </select>
+</section>
+
+<section id="home-products" class="grid"></section>
+{% endblock %}

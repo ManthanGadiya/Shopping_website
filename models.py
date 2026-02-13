@@ -19,6 +19,7 @@ class Admin(Base):
 
     admin_id = Column(Integer, primary_key=True, index=True)
     user_name = Column(String(100), nullable=False)
+    email = Column(String(100), unique=True, index=True, nullable=True)
     password = Column(String(100), nullable=False)
 
 
@@ -117,3 +118,45 @@ class Review(Base):
 
     customer = relationship("Customer", back_populates="reviews")
     product = relationship("Product", back_populates="reviews")
+
+
+class Service(Base):
+    __tablename__ = "services"
+
+    service_id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(120), nullable=False, index=True)
+    description = Column(Text, nullable=True)
+    price = Column(Float, nullable=False, default=0.0)
+    is_active = Column(Integer, nullable=False, default=1)
+
+
+class Article(Base):
+    __tablename__ = "articles"
+
+    article_id = Column(Integer, primary_key=True, index=True)
+    title = Column(String(180), nullable=False, index=True)
+    content = Column(Text, nullable=False)
+    is_published = Column(Integer, nullable=False, default=1)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+
+
+class Notification(Base):
+    __tablename__ = "notifications"
+
+    notification_id = Column(Integer, primary_key=True, index=True)
+    customer_id = Column(Integer, ForeignKey("customers.customer_id"), nullable=False, index=True)
+    title = Column(String(150), nullable=False)
+    message = Column(Text, nullable=False)
+    channel = Column(String(30), nullable=False, default="MOCK_EMAIL_SMS")
+    related_order_id = Column(Integer, ForeignKey("orders.order_id"), nullable=True, index=True)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+
+
+class OrderTrackingEvent(Base):
+    __tablename__ = "order_tracking_events"
+
+    event_id = Column(Integer, primary_key=True, index=True)
+    order_id = Column(Integer, ForeignKey("orders.order_id"), nullable=False, index=True)
+    status = Column(String(40), nullable=False)
+    note = Column(String(255), nullable=True)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)

@@ -14,15 +14,20 @@ router = APIRouter(prefix="/admins", tags=["Admins"])
 def register_admin(payload: schemas.AdminCreate, db: Session = Depends(get_db)):
     admin = crud.create_admin(db, payload)
     if not admin:
-        raise HTTPException(status_code=400, detail="Admin username already exists")
+        raise HTTPException(status_code=400, detail="Admin username/email already exists")
     return admin
 
 
 @router.post("/login", response_model=schemas.AdminToken)
 def login_admin(payload: schemas.AdminLogin, db: Session = Depends(get_db)):
-    admin = crud.authenticate_admin(db, payload.user_name, payload.password)
+    admin = crud.authenticate_admin(
+        db,
+        password=payload.password,
+        user_name=payload.user_name,
+        email=str(payload.email) if payload.email else None,
+    )
     if not admin:
-        raise HTTPException(status_code=401, detail="Invalid username or password")
+        raise HTTPException(status_code=401, detail="Invalid admin email/username or password")
     token = create_access_token({"sub": str(admin.admin_id), "role": "admin", "user_name": admin.user_name})
     return {"access_token": token, "token_type": "bearer", "admin": admin}
 

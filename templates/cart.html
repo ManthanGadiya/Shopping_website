@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Cart - Khushi Pet Shop{% endblock %}
+{% block page_id %}cart{% endblock %}
+{% block content %}
+<section class="section-head">
+    <h2>Your Cart</h2>
+    <a class="btn-link" href="/checkout-page">Go to Checkout</a>
+</section>
+
+<section id="cart-items-page" class="stack"></section>
+
+<section class="card">
+    <p><strong>Total:</strong> <span id="cart-total-page">INR 0</span></p>
+    <div class="actions">
+        <button id="clear-cart-page-btn" type="button">Clear Cart</button>
+    </div>
+    <p id="cart-page-msg" class="msg"></p>
+</section>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Checkout - Khushi Pet Shop{% endblock %}
+{% block page_id %}checkout{% endblock %}
+{% block content %}
+<section class="section-head">
+    <h2>Checkout</h2>
+</section>
+
+<section class="grid-2">
+    <article class="card">
+        <h3>Delivery Details</h3>
+        <form id="checkout-form" class="stack">
+            <input id="checkout-name" type="text" placeholder="Full Name" required>
+            <input id="checkout-email" type="email" placeholder="Email" required>
+            <textarea id="checkout-address" placeholder="Delivery Address" required></textarea>
+            <select id="checkout-payment-method">
+                <option value="UPI">UPI</option>
+                <option value="CARD">Card</option>
+                <option value="COD">Cash on Delivery</option>
+            </select>
+            <button type="submit">Confirm Order</button>
+        </form>
+        <p id="checkout-msg" class="msg"></p>
+    </article>
+
+    <article class="card">
+        <h3>Order Confirmation</h3>
+        <div id="checkout-confirmation" class="muted">No order confirmed yet.</div>
+    </article>
+</section>
+{% endblock %}

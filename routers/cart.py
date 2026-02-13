@@ -10,7 +10,10 @@ router = APIRouter(prefix="/cart", tags=["Cart"])
 
 @router.post("/add", response_model=schemas.CartItemOut, status_code=status.HTTP_201_CREATED)
 def add_to_cart(payload: schemas.CartAdd, db: Session = Depends(get_db)):
-    item = crud.add_to_cart(db, payload)
+    try:
+        item = crud.add_to_cart(db, payload)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc))
     if not item:
         raise HTTPException(status_code=404, detail="Customer or product not found")
     return item
@@ -23,7 +26,10 @@ def get_customer_cart(customer_id: int, db: Session = Depends(get_db)):
 
 @router.put("/item/{cart_item_id}", response_model=schemas.CartItemOut)
 def update_cart_item(cart_item_id: int, payload: schemas.CartItemUpdate, db: Session = Depends(get_db)):
-    item = crud.update_cart_item(db, cart_item_id, payload.quantity)
+    try:
+        item = crud.update_cart_item(db, cart_item_id, payload.quantity)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc))
     if not item:
         raise HTTPException(status_code=404, detail="Cart item not found")
     return item

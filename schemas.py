@@ -42,17 +42,20 @@ class Token(BaseModel):
 
 class AdminCreate(BaseModel):
     user_name: str
+    email: Optional[EmailStr] = None
     password: str = Field(min_length=4)
 
 
 class AdminLogin(BaseModel):
-    user_name: str
+    email: Optional[EmailStr] = None
+    user_name: Optional[str] = None
     password: str
 
 
 class AdminOut(BaseModel):
     admin_id: int
     user_name: str
+    email: Optional[EmailStr] = None
 
     class Config:
         from_attributes = True
@@ -186,6 +189,79 @@ class FeedbackSummaryOut(BaseModel):
     total_reviews: int
     average_rating: float
     top_rated_products: List[TopRatedProductOut]
+
+
+class ServiceBase(BaseModel):
+    name: str
+    description: Optional[str] = None
+    price: float = Field(ge=0)
+    is_active: int = Field(default=1, ge=0, le=1)
+
+
+class ServiceCreate(ServiceBase):
+    pass
+
+
+class ServiceUpdate(BaseModel):
+    name: Optional[str] = None
+    description: Optional[str] = None
+    price: Optional[float] = Field(default=None, ge=0)
+    is_active: Optional[int] = Field(default=None, ge=0, le=1)
+
+
+class ServiceOut(ServiceBase):
+    service_id: int
+
+    class Config:
+        from_attributes = True
+
+
+class ArticleBase(BaseModel):
+    title: str
+    content: str
+    is_published: int = Field(default=1, ge=0, le=1)
+
+
+class ArticleCreate(ArticleBase):
+    pass
+
+
+class ArticleUpdate(BaseModel):
+    title: Optional[str] = None
+    content: Optional[str] = None
+    is_published: Optional[int] = Field(default=None, ge=0, le=1)
+
+
+class ArticleOut(ArticleBase):
+    article_id: int
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+class NotificationOut(BaseModel):
+    notification_id: int
+    customer_id: int
+    title: str
+    message: str
+    channel: str
+    related_order_id: Optional[int] = None
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+class TrackingEventOut(BaseModel):
+    event_id: int
+    order_id: int
+    status: str
+    note: Optional[str] = None
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
 
 
 class OrderOut(BaseModel):

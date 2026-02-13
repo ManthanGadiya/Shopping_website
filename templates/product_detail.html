@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Product Detail - Khushi Pet Shop{% endblock %}
+{% block page_id %}product_detail{% endblock %}
+{% block product_id %}{{ product_id }}{% endblock %}
+{% block content %}
+<section id="product-detail" class="card">
+    <p class="muted">Loading product details...</p>
+</section>
+
+<section class="card">
+    <h3>Reviews</h3>
+    <div id="reviews-list"></div>
+    <hr>
+    <h4>Add Review</h4>
+    <form id="review-form" class="stack">
+        <input id="review-rating" type="number" min="1" max="5" step="0.5" placeholder="Rating (1-5)" required>
+        <textarea id="review-comment" placeholder="Write your review"></textarea>
+        <button type="submit">Submit Review</button>
+    </form>
+    <p id="review-msg" class="msg"></p>
+</section>
+{% endblock %}

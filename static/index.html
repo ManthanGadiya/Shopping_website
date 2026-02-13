@@ -1,71 +1,150 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Pet Shop</title>
+    <title>Khushi Pet Shop - Shop</title>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <header class="site-header">
-        <h1>Online Pet Shop</h1>
-        <p>Frontend Step 2: Customer Authentication</p>
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="brand">Khushi Pet Shop</div>
+            <div class="search-wrap">
+                <input id="product-search" type="text" placeholder="Search products or brands...">
+            </div>
+            <nav class="category-nav">
+                <button class="chip active" data-category="all" type="button">All</button>
+                <button class="chip" data-category="food" type="button">Dog</button>
+                <button class="chip" data-category="food" type="button">Cat</button>
+                <button class="chip" data-category="accessories" type="button">Accessories</button>
+            </nav>
+            <div class="auth-quick">
+                <button id="nav-login-btn" class="auth-chip" type="button">Login</button>
+                <button id="nav-signup-btn" class="auth-chip signup" type="button">Sign Up</button>
+            </div>
+            <button id="cart-chip" class="cart-chip" type="button">Cart (0)</button>
+        </div>
     </header>
 
-    <main class="layout">
-        <section class="card">
-            <h2>Backend Status</h2>
-            <p id="status-text">Checking backend...</p>
-            <label for="api-base-url">Backend URL</label>
-            <input id="api-base-url" type="text" placeholder="http://127.0.0.1:8000">
-            <div class="actions">
-                <button id="save-api-url" type="button">Save URL</button>
-                <button id="retry-connection" type="button">Retry Check</button>
+    <main class="container">
+        <section class="hero">
+            <h1>Premium pet food & supplies - Pune delivery</h1>
+            <p>Fast delivery • Trusted brands • Expert support</p>
+            <div class="hero-actions">
+                <button id="hero-login-btn" type="button">Login</button>
+                <button id="hero-signup-btn" class="signup" type="button">Sign Up</button>
             </div>
         </section>
 
-        <section class="card">
-            <h2>Customer Register</h2>
-            <form id="register-form" class="stack">
-                <input id="reg-name" type="text" placeholder="Name" required>
-                <input id="reg-contact" type="text" placeholder="Contact Number">
-                <input id="reg-email" type="email" placeholder="Email" required>
-                <input id="reg-pet-type" type="text" placeholder="Pet Type (Dog/Cat/etc)">
-                <input id="reg-password" type="password" placeholder="Password" required>
-                <button type="submit">Register</button>
-            </form>
-            <p id="register-msg" class="inline-message"></p>
-        </section>
-
-        <section class="card">
-            <h2>Customer Login</h2>
-            <form id="login-form" class="stack">
-                <input id="login-email" type="email" placeholder="Email" required>
-                <input id="login-password" type="password" placeholder="Password" required>
-                <button type="submit">Login</button>
-            </form>
-            <div class="actions">
-                <button id="logout-btn" type="button">Logout</button>
-                <button id="refresh-profile-btn" type="button">Refresh Profile</button>
+        <section class="title-row">
+            <h2>Featured products</h2>
+            <div class="sort-wrap">
+                <label for="sort-products">Sort:</label>
+                <select id="sort-products">
+                    <option value="featured">Featured</option>
+                    <option value="price_asc">Price: Low to High</option>
+                    <option value="price_desc">Price: High to Low</option>
+                    <option value="rating_desc">Rating</option>
+                </select>
             </div>
-            <p id="auth-msg" class="inline-message"></p>
         </section>
 
-        <section class="card">
-            <h2>My Profile</h2>
-            <p><strong>Status:</strong> <span id="auth-status">Logged out</span></p>
-            <pre id="profile-box" class="profile-box">No profile loaded.</pre>
+        <section id="products-grid" class="products-grid">
+            <p class="muted">Loading products...</p>
         </section>
 
-        <section class="card">
-            <h2>Admin Area</h2>
-            <p>Placeholder for dashboard, products, orders, and reports.</p>
+        <section id="guest-auth-section" class="support-grid">
+            <article class="panel">
+                <h3>Customer Sign Up</h3>
+                <form id="register-form" class="stack">
+                    <input id="reg-name" type="text" placeholder="Name" required>
+                    <input id="reg-contact" type="text" placeholder="Contact Number">
+                    <input id="reg-email" type="email" placeholder="Email" required>
+                    <input id="reg-pet-type" type="text" placeholder="Pet Type (Dog/Cat/etc)">
+                    <input id="reg-password" type="password" placeholder="Password" required>
+                    <button type="submit">Create Account</button>
+                </form>
+                <p id="register-msg" class="inline-message"></p>
+            </article>
+
+            <article class="panel">
+                <h3>Customer Login</h3>
+                <form id="login-form" class="stack">
+                    <input id="login-email" type="email" placeholder="Email" required>
+                    <input id="login-password" type="password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <p id="auth-msg" class="inline-message"></p>
+            </article>
+        </section>
+
+        <section id="member-zone" class="support-grid hidden">
+            <article class="panel">
+                <h3>Backend Status</h3>
+                <p id="status-text">Checking backend...</p>
+                <label for="api-base-url">Backend URL</label>
+                <input id="api-base-url" type="text" placeholder="http://127.0.0.1:8000">
+                <div class="actions">
+                    <button id="save-api-url" type="button">Save URL</button>
+                    <button id="retry-connection" type="button">Retry Check</button>
+                </div>
+            </article>
+
+            <article class="panel">
+                <h3>Account Controls</h3>
+                <p><strong>Status:</strong> <span id="auth-status">Logged out</span></p>
+                <div class="actions">
+                    <button id="logout-btn" type="button">Logout</button>
+                    <button id="refresh-profile-btn" type="button">Refresh Profile</button>
+                </div>
+            </article>
+
+            <article class="panel">
+                <h3>My Profile</h3>
+                <pre id="profile-box" class="profile-box">No profile loaded.</pre>
+            </article>
+
+            <article class="panel">
+                <h3>Admin Area</h3>
+                <p class="muted">Admin dashboard, orders, reports, and payment tools are available in upcoming steps.</p>
+            </article>
         </section>
     </main>
 
-    <footer class="site-footer">
-        <small>College Project Demo - Receipt-only payment flow.</small>
+    <footer class="footer">
+        <p>© 2026 Khushi Pet Shop • Pune • +91 8799974075</p>
     </footer>
+
+    <div id="cart-overlay" class="cart-overlay hidden"></div>
+    <aside id="cart-drawer" class="cart-drawer hidden" aria-label="Shopping cart">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button id="close-cart-btn" class="icon-btn" type="button">×</button>
+        </div>
+        <div id="cart-items" class="cart-items">
+            <p class="muted">Cart is empty.</p>
+        </div>
+        <div class="cart-footer">
+            <p><strong>Total:</strong> <span id="cart-total">INR 0</span></p>
+            <div class="actions">
+                <button id="clear-cart-btn" type="button">Clear Cart</button>
+            </div>
+            <p id="cart-msg" class="inline-message"></p>
+        </div>
+    </aside>
+
+    <template id="product-card-template">
+        <article class="product-card">
+            <div class="product-type"></div>
+            <h4 class="product-name"></h4>
+            <p class="product-meta"></p>
+            <div class="product-bottom">
+                <span class="product-price"></span>
+                <button class="add-cart-btn" type="button">Add</button>
+            </div>
+        </article>
+    </template>
 
     <script src="/static/js/app.js"></script>
 </body>

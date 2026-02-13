@@ -59,3 +59,11 @@ def update_status(
     if not order:
         raise HTTPException(status_code=404, detail="Order not found")
     return order
+
+
+@router.get("/{order_id}/tracking", response_model=list[schemas.TrackingEventOut])
+def get_tracking_events(order_id: int, db: Session = Depends(get_db)):
+    order = crud.get_order(db, order_id)
+    if not order:
+        raise HTTPException(status_code=404, detail="Order not found")
+    return crud.list_tracking_events_for_order(db, order_id)
