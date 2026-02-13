@@ -24,23 +24,39 @@ These cover the main PDF workflow: products, cart, order placement, payment trac
 
 ### 3. Schema Validation
 Added request/response schemas in `schemas.py` for:
+- Admin auth
+- Customer auth/profile
 - Products
 - Cart operations
 - Checkout and orders
-- Payment output
+- Payments and receipts
+- Reports
 - Reviews
 
 ### 4. CRUD / Business Logic
 Implemented in `crud.py`:
+- Admin create/login lookup
+- Customer create/login/auth
 - Product create/read/update/delete
 - Add/update/remove/clear cart
 - Checkout from cart into order + order items
 - Stock validation and stock deduction on checkout
-- Payment record creation on checkout
+- Payment record creation on checkout (receipt generation only)
+- Payment retrieval and payment status update (manual/admin)
+- Receipt payload generation
 - Order retrieval and status updates
+- Admin all-orders listing
+- Sales report summary
+- Inventory report summary
+- Feedback report summary
 - Review creation and product rating recalculation
 
 ### 5. API Routers Implemented
+
+#### Admins/Auth (`routers/admins.py`)
+- `POST /admins/register`
+- `POST /admins/login`
+- `GET /admins/me` (Bearer token, admin role)
 
 #### Customers/Auth (`routers/customers.py`)
 - `POST /customers/register`
@@ -67,9 +83,22 @@ Implemented in `crud.py`:
 
 #### Orders (`routers/orders.py`)
 - `POST /orders/checkout`
+- `GET /orders/` (admin only)
 - `GET /orders/{order_id}`
 - `GET /orders/customer/{customer_id}`
-- `PATCH /orders/{order_id}/status`
+- `PATCH /orders/{order_id}/status` (admin only)
+
+#### Payments (`routers/payments.py`)
+- `GET /payments/` (admin only)
+- `GET /payments/{payment_id}` (admin only)
+- `GET /payments/order/{order_id}` (admin only)
+- `PATCH /payments/{payment_id}/status` (admin only)
+- `GET /payments/{payment_id}/receipt`
+
+#### Reports (`routers/reports.py`)
+- `GET /reports/sales-summary` (admin only)
+- `GET /reports/inventory-summary` (admin only)
+- `GET /reports/feedback-summary` (admin only)
 
 #### Reviews (`routers/reviews.py`)
 - `POST /reviews/`
@@ -81,30 +110,66 @@ Implemented in `crud.py`:
 - Added auth helper utilities in `utils/auth.py`:
   - PBKDF2 password hashing/verification
   - JWT access token creation and validation
+- Added role-based dependencies in `utils/dependencies.py`:
+  - `require_admin`
+  - `get_current_customer`
 
-### 7. Validation Completed
+### 7. Authorization Rules
+- Product create/update/delete requires admin token
+- Customer list/get/update/delete by id requires admin token
+- `GET /orders/` and `PATCH /orders/{order_id}/status` require admin token
+- payment management endpoints require admin token
+- reports endpoints require admin token
+- `GET /customers/me` requires customer token
+
+### 8. Payment Design (College Project)
+- No real payment gateway integration is used.
+- At checkout, the system creates an order and stores a payment record with status `RECEIPT_GENERATED`.
+- A receipt can be generated via `GET /payments/{payment_id}/receipt`.
+- The receipt clearly states that no actual transaction was processed.
+
+### 9. Seed Data Added
+- Added `utils/seed_data.py`
+- Seeded into `petshop.db`:
+  - `1` admin
+  - `10` customers
+- Run with:
+  - `python -m utils.seed_data`
+- Seed credentials:
+  - Admin: `admin1` / `admin1234`
+  - Customers: `user1@example.com` ... `user10@example.com` with password `user1234`
+
+### 10. Validation Completed
 - Python compile check (`compileall`) for project files
 - API smoke flow tested successfully:
+  - admin login + `GET /admins/me`
   - customer register/login
   - authenticated `GET /customers/me`
-  - customer update/get/list
+  - customer blocked from admin-only endpoints (403)
+  - admin access to admin-only endpoints
   - create product
   - add to cart
   - checkout
+  - verify checkout `payment_status = RECEIPT_GENERATED`
+  - fetch payment by order
+  - generate payment receipt
+  - run reports endpoints
   - fetch order
   - create review
   - list customer orders
 
 ## Current Status
 Backend endpoint phase is completed for:
+- Admin authentication and role-based access control
+- Customer authentication and profile token flow
 - Product management
 - Cart management
-- Order + payment flow
+- Order + receipt-only payment flow
+- Payment and receipt module
+- Admin reports module
 - Product reviews
 
-## Suggested Next Backend Tasks
-- Customer registration/login endpoints
-- Admin authentication/authorization
-- Reports endpoints (sales, inventory, feedback)
-- Payment gateway integration (currently mocked as successful in checkout)
-- Test suite (unit + API integration tests)
+## Remaining Optional Improvements
+- PDF receipt file generation in `utils/pdf_generator.py`
+- Unit/integration test suite with pytest
+- Pagination/filtering enhancements for admin dashboards

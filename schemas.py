@@ -40,6 +40,30 @@ class Token(BaseModel):
     customer: CustomerOut
 
 
+class AdminCreate(BaseModel):
+    user_name: str
+    password: str = Field(min_length=4)
+
+
+class AdminLogin(BaseModel):
+    user_name: str
+    password: str
+
+
+class AdminOut(BaseModel):
+    admin_id: int
+    user_name: str
+
+    class Config:
+        from_attributes = True
+
+
+class AdminToken(BaseModel):
+    access_token: str
+    token_type: str
+    admin: AdminOut
+
+
 class ProductBase(BaseModel):
     product_name: str
     product_type: str
@@ -110,6 +134,58 @@ class PaymentOut(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class PaymentStatusUpdate(BaseModel):
+    status: str = Field(min_length=2, max_length=30)
+
+
+class ReceiptItemOut(BaseModel):
+    product_id: int
+    quantity: int
+    unit_price: float
+    sub_total: float
+
+
+class PaymentReceiptOut(BaseModel):
+    receipt_id: str
+    payment_id: int
+    order_id: int
+    payment_method: str
+    payment_status: str
+    customer_id: Optional[int] = None
+    customer_name: Optional[str] = None
+    order_total: float
+    order_date: Optional[str] = None
+    items: List[ReceiptItemOut]
+    note: str
+    generated_at: str
+
+
+class SalesSummaryOut(BaseModel):
+    total_orders: int
+    total_revenue: float
+    total_items_sold: int
+    payment_receipts_generated: int
+
+
+class InventorySummaryOut(BaseModel):
+    total_products: int
+    out_of_stock: int
+    low_stock: int
+    low_stock_threshold: int
+
+
+class TopRatedProductOut(BaseModel):
+    product_id: int
+    product_name: str
+    rating: float
+
+
+class FeedbackSummaryOut(BaseModel):
+    total_reviews: int
+    average_rating: float
+    top_rated_products: List[TopRatedProductOut]
 
 
 class OrderOut(BaseModel):

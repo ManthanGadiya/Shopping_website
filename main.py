@@ -3,7 +3,7 @@ from fastapi import FastAPI
 
 import models
 from database import Base, engine
-from routers import cart, customers, orders, products, reviews
+from routers import admins, cart, customers, orders, payments, products, reports, reviews
 
 Base.metadata.create_all(bind=engine)
 
@@ -11,8 +11,11 @@ app = FastAPI(title="Online Pet Shop API")
 
 app.include_router(products.router)
 app.include_router(customers.router)
+app.include_router(admins.router)
 app.include_router(cart.router)
 app.include_router(orders.router)
+app.include_router(payments.router)
+app.include_router(reports.router)
 app.include_router(reviews.router)
 
 
